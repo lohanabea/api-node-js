@@ -1,7 +1,7 @@
-const db = require('../dataBase/connection'); 
+const db = require('../database/connection'); 
 
 module.exports = {
-    async listarUsuarios(request, response) {
+    async listarLocalizacoes(request, response) {
         try {
             return response.status(200).json({
                 sucesso: true, 
@@ -16,7 +16,7 @@ module.exports = {
             });
         }
     }, 
-    async cadastrarUsuarios(request, response) {
+    async cadastrarLocalizacoes(request, response) {
         try {
             return response.status(200).json({
                 sucesso: true, 
@@ -31,7 +31,7 @@ module.exports = {
             });
         }
     }, 
-    async editarUsuarios(request, response) {
+    async editarLocalizacoes(request, response) {
         try {
             return response.status(200).json({
                 sucesso: true, 
@@ -46,7 +46,7 @@ module.exports = {
             });
         }
     }, 
-    async apagarUsuarios(request, response) {
+    async apagarLocalizacoes(request, response) {
         try {
             return response.status(200).json({
                 sucesso: true, 

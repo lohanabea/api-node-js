@@ -1,12 +1,17 @@
 const express = require('express'); 
 const router = express.Router(); 
 
-const UsuariosController = require('../controllers/usuarios'); 
+const Redes_apoioController = require('../controllers/redes_apoio'); 
+const LocalizacoesController = require('../controllers/localizacoes'); 
 
-router.get('/usuarios', UsuariosController.listarUsuarios); 
-router.post('/usuarios', UsuariosController.cadastrarUsuarios); 
-router.patch('/usuarios', UsuariosController.editarUsuarios); 
-router.delete('/usuarios', UsuariosController.apagarUsuarios); 
+router.get('/redes_apoio', Redes_apoioController.listarRedes_apoio); 
+router.post('/redes_apoio', Redes_apoioController.cadastrarRedes_apoio); 
+router.patch('/redes_apoio', Redes_apoioController.editarRedes_apoio); 
+router.delete('/redes_apoio', Redes_apoioController.apagarRedes_apoio); 
 
+router.get('/localizacoes', LocalizacoesController.listarLocalizacoes); 
+router.post('/localizacoes', LocalizacoesController.cadastrarLocalizacoes); 
+router.patch('/localizacoes', LocalizacoesController.editarLocalizacoes); 
+router.delete('/localizacoes', LocalizacoesController.apagarLocalizacoes); 
 
 module.exports = router;
