@@ -3,10 +3,18 @@ const db = require('../database/connection');
 module.exports = {
     async listarLocalizacoes(request, response) {
         try {
+            const sql = `
+            SELECT
+               lcz_id, psi_id, lcz_nome_clinica, lcz_cep, lcz_bairro, lcz_complemento, 
+               lcz_cidade, lcz_estado FROM localizacoes;
+            `;
+            const[rows] = await db.query(sql);
+
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de localizações', 
-                dados: null
+                dados: rows,
+                itens: rows.lenghth
             });
         } catch (error) {
             return response.status(500).json({

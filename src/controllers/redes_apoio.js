@@ -3,10 +3,16 @@ const db = require('../database/connection');
 module.exports = {
     async listarRedes_apoio(request, response) {
         try {
+            const sql = `
+            SELECT
+             redeapoio_id, redeapoio_nome, redeapoio_descricao, redeapoio_contato, 
+             redeapoio_logo FROM redes_apoio;
+            `;
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de rede-apoio', 
-                dados: null
+                dados: rows,
+                itens: rows.lenghth
             });
         } catch (error) {
             return response.status(500).json({
