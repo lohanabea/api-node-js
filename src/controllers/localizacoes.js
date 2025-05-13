@@ -5,7 +5,7 @@ module.exports = {
         try {
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Lista de usuários', 
+                mensagem: 'Lista de localizações', 
                 dados: null
             });
         } catch (error) {
@@ -20,7 +20,7 @@ module.exports = {
         try {
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Cadastro de usuários', 
+                mensagem: 'Cadastro de localização', 
                 dados: null
             });
         } catch (error) {
@@ -35,7 +35,7 @@ module.exports = {
         try {
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Alteração no cadastro de usuário', 
+                mensagem: 'Alteração no cadastro de localização', 
                 dados: null
             });
         } catch (error) {
@@ -50,7 +50,7 @@ module.exports = {
         try {
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Exclusão de usuário', 
+                mensagem: 'Exclusão de localização', 
                 dados: null
             });
         } catch (error) {

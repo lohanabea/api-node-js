@@ -4,10 +4,10 @@ const router = express.Router();
 const Redes_apoioController = require('../controllers/redes_apoio'); 
 const LocalizacoesController = require('../controllers/localizacoes'); 
 
-router.get('/redes_apoio', Redes_apoioController.listarRedes_apoio); 
-router.post('/redes_apoio', Redes_apoioController.cadastrarRedes_apoio); 
-router.patch('/redes_apoio', Redes_apoioController.editarRedes_apoio); 
-router.delete('/redes_apoio', Redes_apoioController.apagarRedes_apoio); 
+router.get('/redes-apoio', Redes_apoioController.listarRedes_apoio); 
+router.post('/redes-apoio', Redes_apoioController.cadastrarRedes_apoio); 
+router.patch('/redes-apoio', Redes_apoioController.editarRedes_apoio); 
+router.delete('/redes-apoio', Redes_apoioController.apagarRedes_apoio); 
 
 router.get('/localizacoes', LocalizacoesController.listarLocalizacoes); 
 router.post('/localizacoes', LocalizacoesController.cadastrarLocalizacoes); 
