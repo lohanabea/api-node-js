@@ -26,10 +26,32 @@ module.exports = {
     }, 
     async cadastrarLocalizacoes(request, response) {
         try {
+            const{psi_id, nome_clin, CEP, bairro, complemento, cidade, estado}= request.body;
+
+            const sql= `
+                INSERT INTO localizacoes 
+                     (psi_id, lcz_nome_clinica, lcz_cep, lcz_bairro, lcz_complemento, lcz_cidade, lcz_estado) 
+                VALUES
+                     (?, ?, ?, ?, ?, ?, ?);
+            `
+            const values= [psi_id, nome_clin, CEP, bairro, complemento, cidade, estado];
+
+            const [result]= await db.query(sql, values);
+
+            const dados= {
+                lcz_id: result.insertId,
+                nome_clin,
+                CEP, 
+                bairro,
+                complemento, 
+                cidade, 
+                estado
+            };
+
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Cadastro de localização', 
-                dados: null
+                dados: dados
             });
         } catch (error) {
             return response.status(500).json({

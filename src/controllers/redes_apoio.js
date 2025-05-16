@@ -10,7 +10,7 @@ module.exports = {
             `;
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Lista de rede-apoio', 
+                mensagem: 'Lista de redes_apoio', 
                 dados: rows,
                 itens: rows.lenghth
             });
@@ -24,10 +24,30 @@ module.exports = {
     }, 
     async cadastrarRedes_apoio(request, response) {
         try {
+            const{nome, descricao, contato, logo}= request.body;
+
+            const sql= `
+                INSERT INTO redes_apoio 
+                    (redeapoio_nome, redeapoio_descricao, redeapoio_contato, redeapoio_logo)
+                 VALUES
+                     (?, ?, ?, ?);
+            `
+            const values= [nome, descricao, contato, logo];
+
+            const [result]= await db.query(sql, values);
+
+            const dados= {
+                redeapoio_id: result.insertId,
+                nome,
+                descricao,
+                contato,
+                logo
+            };
+
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Cadastro de rede-apoio', 
-                dados: null
+                mensagem: 'Cadastro de redes_apoio', 
+                dados: dados
             });
         } catch (error) {
             return response.status(500).json({
