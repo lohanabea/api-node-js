@@ -59,6 +59,34 @@ module.exports = {
     }, 
     async editarRedes_apoio(request, response) {
         try {
+            const{nome, descricao, contato, logo}= request.body;
+            const {redeapoio_id} = request.params;
+
+            const sql= `
+                UPDATE redes_apoio SET
+                    redeapoio_nome = ?, redeapoio_descricao = ?, redeapoio_contato = ?, redeapoio_logo= ?
+                 WHARE
+                     redes_apoio = ?;
+            `
+            const values= [nome, descricao, contato, logo];
+
+            const [result]= await db.query(sql, values);
+
+            if(result.affectedRows === 0) {
+                return response.status(404) .json({
+                    sucesso: false;
+                    mensagem:``,
+                })
+            }
+
+            const dados= {
+                redeapoio_id: result.insertId,
+                nome,
+                descricao,
+                contato,
+                logo
+            };
+
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Alteração no cadastro de rede-apoio', 
