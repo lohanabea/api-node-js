@@ -8,11 +8,12 @@ module.exports = {
              redeapoio_id, redeapoio_nome, redeapoio_descricao, redeapoio_contato, 
              redeapoio_logo FROM redes_apoio;
             `;
+            const [rows] =await db.query(sql);
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de redes_apoio', 
-                dados: rows,
-                itens: rows.lenghth
+                itens: rows.lenghth,
+                dados: rows
             });
         } catch (error) {
             return response.status(500).json({
@@ -64,23 +65,24 @@ module.exports = {
 
             const sql= `
                 UPDATE redes_apoio SET
-                    redeapoio_nome = ?, redeapoio_descricao = ?, redeapoio_contato = ?, redeapoio_logo= ?
+                    redeapoio_nome = ?, redeapoio_descricao = ?, redeapoio_contato = ?, redeapoio_logo= ?, redeapoio_id= ?
                  WHARE
-                     redes_apoio = ?;
+                     redeapoio_id = ?;
             `
-            const values= [nome, descricao, contato, logo];
+            const values= [nome, descricao, contato, logo,redeapoio_id];
 
             const [result]= await db.query(sql, values);
 
             if(result.affectedRows === 0) {
                 return response.status(404) .json({
-                    sucesso: false;
-                    mensagem:``,
-                })
+                    sucesso: false,
+                    mensagem:`Rede de apoio ${redeapoio_id} não encontrado!`,
+                    dados:null
+                });
             }
 
-            const dados= {
-                redeapoio_id: result.insertId,
+            const dados = {
+                redeapoio_id,
                 nome,
                 descricao,
                 contato,
@@ -89,13 +91,14 @@ module.exports = {
 
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Alteração no cadastro de rede-apoio', 
-                dados: null
+                mensagem: `Rede de apoio ${redeapoio_id} atualizado com sucesso!`, 
+                dados
             });
+
         } catch (error) {
             return response.status(500).json({
                 sucesso: false, 
-                mensagem: 'Erro na requisição.', 
+                mensagem: 'Erro na requisição.',
                 dados: error.message
             });
         }

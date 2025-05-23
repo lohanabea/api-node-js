@@ -6,7 +6,7 @@ const LocalizacoesController = require('../controllers/localizacoes');
 
 router.get('/redes-apoio', Redes_apoioController.listarRedes_apoio); 
 router.post('/redes-apoio', Redes_apoioController.cadastrarRedes_apoio); 
-router.patch('/redes-apoio', Redes_apoioController.editarRedes_apoio); 
+router.patch('/redes-apoio/: redeapoio_id', Redes_apoioController.editarRedes_apoio); 
 router.delete('/redes-apoio', Redes_apoioController.apagarRedes_apoio); 
 
 router.get('/localizacoes', LocalizacoesController.listarLocalizacoes); 
