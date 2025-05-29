@@ -63,6 +63,19 @@ module.exports = {
     }, 
     async editarLocalizacoes(request, response) {
         try {
+            const{psi_id, nome_clin, CEP, bairro, complemento, cidade, estado}= request.body;
+            const {lcz_id} = request.params;
+
+            const sql= `
+                UPDATE localizacoes SET
+                   psi_id = ?, lcz_nome_clinica = ?, lcz_cep= ?, lcz_bairro = ?, lcz_complemento = ?, lcz_cidade = ?, lcz_estado = ? 
+                   WHERE 
+                     lcz_id = ?;
+            `
+            const values= [nome, descricao, contato, logo,redeapoio_id];
+
+            const [result]= await db.query(sql, values);
+
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Alteração no cadastro de localização', 

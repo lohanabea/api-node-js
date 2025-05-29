@@ -65,8 +65,8 @@ module.exports = {
 
             const sql= `
                 UPDATE redes_apoio SET
-                    redeapoio_nome = ?, redeapoio_descricao = ?, redeapoio_contato = ?, redeapoio_logo= ?, redeapoio_id= ?
-                 WHARE
+                    redeapoio_nome = ?, redeapoio_descricao = ?, redeapoio_contato = ?, redeapoio_logo= ? 
+                 WHERE 
                      redeapoio_id = ?;
             `
             const values= [nome, descricao, contato, logo,redeapoio_id];
