@@ -9,7 +9,6 @@ module.exports = {
                lcz_cidade, lcz_estado FROM localizacoes;
             `;
             const[rows] = await db.query(sql);
-
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de localizações', 
@@ -71,15 +70,34 @@ module.exports = {
                    psi_id = ?, lcz_nome_clinica = ?, lcz_cep= ?, lcz_bairro = ?, lcz_complemento = ?, lcz_cidade = ?, lcz_estado = ? 
                    WHERE 
                      lcz_id = ?;
-            `
-            const values= [nome, descricao, contato, logo,redeapoio_id];
+            `;
+
+            const values= [psi_id, nome_clin, CEP, bairro, complemento, cidade, estado,lcz_id ];
 
             const [result]= await db.query(sql, values);
 
+            if(result.affectedRows === 0) {
+                return response.status(404) .json({
+                    sucesso: false,
+                    mensagem:`Rede de apoio ${lcz_id} não encontrado!`,
+                    dados:null
+                });
+            }
+
+            const dados = {
+                lcz_id,
+                nome_clin,
+                CEP, 
+                bairro,
+                complemento, 
+                cidade, 
+                estado
+            };
+
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Alteração no cadastro de localização', 
-                dados: null
+                mensagem: `localização ${lcz_id} atualizado com sucesso!`, 
+                dados
             });
         } catch (error) {
             return response.status(500).json({
@@ -91,9 +109,21 @@ module.exports = {
     }, 
     async apagarLocalizacoes(request, response) {
         try {
+            const {lcz_id} = request.params;
+            const sql=`DELETE FROM localizacoes WHERE lcz_id= ?`;
+            const values = [lcz_id];
+            const [result]= await db.query(sql, values) ;
+
+            if(result.affectedRows === 0) {
+                return response.status(404) .json({
+                    sucesso: false,
+                    mensagem:`Localização ${lcz_id} não encontrado!`,
+                    dados:null
+                });
+            }
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Exclusão de localização', 
+                mensagem: `Localização ${lcz_id} excluida com sucesso`, 
                 dados: null
             });
         } catch (error) {
